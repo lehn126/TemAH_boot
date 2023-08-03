@@ -1,7 +1,4 @@
-package com.temah.ahfm.common.web;
-
-import com.temah.ahfm.model.Alarm;
-import org.apache.ibatis.annotations.Param;
+package com.temah.common.web;
 
 import java.io.Serializable;
 import java.util.List;
@@ -13,7 +10,7 @@ public interface BaseMapper<T, ID extends Serializable> {
      */
     int deleteByPrimaryKey(Integer id);
 
-    int deleteByPrimaryKeys(@Param("ids") List<ID> ids);
+    int deleteByPrimaryKeys(List<ID> ids);
 
     /**
      * 由 mybatis-generator 产生
@@ -25,7 +22,7 @@ public interface BaseMapper<T, ID extends Serializable> {
      */
     int insertSelective(T record);
 
-    int batchInsert(@Param("list") List<T> list);
+    int batchInsert(List<T> list);
 
     /**
      * 由 mybatis-generator 产生

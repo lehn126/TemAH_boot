@@ -1,4 +1,4 @@
-package com.temah.ahfm.common.web;
+package com.temah.common.web;
 
 import java.io.Serializable;
 
@@ -61,7 +61,7 @@ public class RestResult implements Serializable{
 		return new RestResult(SUCCESS,data);
 	}
 
-	public static RestResult fail(String errCode,Object data) {
+	public static RestResult fail(String errCode, Object data) {
 		return new RestResult(errCode,data);
 	}
 	

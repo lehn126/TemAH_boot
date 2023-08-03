@@ -1,4 +1,4 @@
-package com.temah.ahfm.common.constant;
+package com.temah.ahfm.constant;
 
 public enum PerceivedSeverity {
     Cleared,

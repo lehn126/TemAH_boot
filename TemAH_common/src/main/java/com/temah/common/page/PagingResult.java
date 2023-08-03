@@ -1,4 +1,4 @@
-package com.temah.ahfm.common.page;
+package com.temah.common.page;
 
 import java.io.Serializable;
 import java.util.List;

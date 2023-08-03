@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>com.temah</groupId>
 		<artifactId>TemAH_boot</artifactId>
-		<version>${revision}</version>
+		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	<artifactId>TemAH_ahfm</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
@@ -34,6 +34,13 @@
 			<artifactId>mysql-connector-j</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>com.temah</groupId>
+			<artifactId>TemAH_common</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>

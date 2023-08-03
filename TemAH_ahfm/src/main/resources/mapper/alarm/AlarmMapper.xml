@@ -144,7 +144,7 @@
   </update>
 
   <!-- 批量插入记录 -->
-  <insert id="batchInsert" parameterType="java.util.List">
+  <insert id="batchInsert" parameterType="list">
     insert into alarm
         (
          id,
@@ -174,10 +174,10 @@
   <!-- 批量删除，真实项目中这里需要修改为 update 如：
   update alarm set status = '-1'
    -->
-  <delete id="deleteByPrimaryKeys" parameterType="java.lang.Integer">
+  <delete id="deleteByPrimaryKeys" parameterType="list">
     delete from alarm
     where id IN
-    <foreach collection="ids" item="id" open="("
+    <foreach collection="list" item="id" index="index" open="("
              separator="," close=")">
       #{id}
     </foreach>

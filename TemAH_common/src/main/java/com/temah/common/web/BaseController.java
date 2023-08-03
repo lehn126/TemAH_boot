@@ -1,4 +1,4 @@
-package com.temah.ahfm.common.web;
+package com.temah.common.web;
 
 import java.io.Serializable;
 import java.util.Map;

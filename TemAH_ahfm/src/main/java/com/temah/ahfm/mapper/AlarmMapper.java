@@ -1,7 +1,7 @@
 package com.temah.ahfm.mapper;
 
-import com.temah.ahfm.common.web.BaseMapper;
 import com.temah.ahfm.model.Alarm;
+import com.temah.common.web.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper

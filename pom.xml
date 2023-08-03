@@ -16,13 +16,12 @@
 
     <groupId>com.temah</groupId>
     <artifactId>TemAH_boot</artifactId>
-    <version>${revision}</version>
+    <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>TemAH_boot</name>
     <description>TemAH_boot</description>
     <properties>
         <java.version>11</java.version>
-        <revision>0.0.1-SNAPSHOT</revision>
     </properties>
 
     <dependencies>
@@ -31,33 +30,7 @@
 
     <build>
         <plugins>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>flatten-maven-plugin</artifactId>
-                <version>1.5.0</version>
-                <configuration>
-                    <!-- 避免IDE将 .flattened-pom.xml 自动识别为功能模块 -->
-                    <flattenedPomFilename>pom-xml-flattened</flattenedPomFilename>
-                    <updatePomFile>true</updatePomFile>
-                    <flattenMode>resolveCiFriendliesOnly</flattenMode>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>flatten</id>
-                        <phase>process-resources</phase>
-                        <goals>
-                            <goal>flatten</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>flatten.clean</id>
-                        <phase>clean</phase>
-                        <goals>
-                            <goal>clean</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
+
         </plugins>
     </build>
 

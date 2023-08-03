@@ -1,4 +1,4 @@
-package com.temah.ahfm.common.constant;
+package com.temah.common.constant;
 
 public class MsgConstant {
 
