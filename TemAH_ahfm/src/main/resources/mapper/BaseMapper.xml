@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="base">
+    <!-- 默认按照更新时间排序 -->
+    <sql id="pagination">
+        order by
+        <choose>
+            <when test="sortBy!=null and sortBy != ''">${sortBy}</when>
+            <otherwise>${defaultSortField}</otherwise>
+        </choose>
+        <choose>
+            <when test="sortOrder =='asc'">asc</when>
+            <when test="sortOrder =='desc'">desc</when>
+            <otherwise>${defaultSortOrder}</otherwise>
+        </choose>
+        LIMIT
+        <choose>
+            <when test="offset != null">#{offset},</when>
+            <otherwise>0,</otherwise>
+        </choose>
+        <choose>
+            <when test="pageSize != null">#{pageSize}</when>
+            <otherwise>2147483647</otherwise>
+        </choose>
+    </sql>
+</mapper>

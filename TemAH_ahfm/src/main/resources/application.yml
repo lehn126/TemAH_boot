@@ -1,0 +1,17 @@
+server:
+  port: 8088
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.2.105:3306/test
+    username: root
+    password: 123456
+mybatis:
+  config-location: classpath:mybatis/mybatis-config.xml
+  mapper-locations: classpath:mapper/*.xml,classpath:mapper/**/*.xml
+  type-aliases-package: com.temah.ahfm.model
