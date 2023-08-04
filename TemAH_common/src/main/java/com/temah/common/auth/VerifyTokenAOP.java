@@ -34,7 +34,7 @@ public class VerifyTokenAOP {
     }
 
     @Around("annotationPointCut()")
-    public Object before(ProceedingJoinPoint joinPoint) throws Throwable {
+    public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
         RequestAttributes attributes = RequestContextHolder.getRequestAttributes();
         ServletRequestAttributes sra = (ServletRequestAttributes) attributes;
         if (sra != null) {
