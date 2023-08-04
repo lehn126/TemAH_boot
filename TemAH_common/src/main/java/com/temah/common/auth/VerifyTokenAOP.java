@@ -1,6 +1,8 @@
 package com.temah.common.auth;
 
 
+import com.temah.common.constant.MsgConstant;
+import com.temah.common.exception.AuthException;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -11,7 +13,6 @@ import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import javax.naming.AuthenticationException;
 import javax.servlet.http.HttpServletRequest;
 
 @Component
@@ -44,10 +45,10 @@ public class VerifyTokenAOP {
                 token = request.getParameter("Authorization");
             }
             if (token == null || token.isEmpty()) {
-                throw new AuthenticationException("Can't not found token in the request");
+                throw new AuthException(MsgConstant.TOKEN_MISS_ERROR, "Can't not found token in the request");
             }
             if (!jwtUtil.check(token)) {
-                throw new AuthenticationException("Token validation failed");
+                throw new AuthException(MsgConstant.TOKEN_VALID_ERROR, "Token validation failed");
             }
         }
         return joinPoint.proceed();

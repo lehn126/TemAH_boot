@@ -31,7 +31,7 @@ public abstract class BaseService <T, ID extends Serializable> {
     public void update(T entity) throws Exception {
         int affectedRows = mapper.updateByPrimaryKeySelective(entity);
         if(affectedRows == 0) {
-            throw new Exception(MsgConstant.UPDATE_FAILED);
+            throw new RuntimeException(MsgConstant.UPDATE_FAILED);
         }
     }
 
