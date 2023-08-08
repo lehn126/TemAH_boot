@@ -1,0 +1,12 @@
+server:
+  port: 7002
+
+security:
+  oauth2:
+    jwt:
+      enable: true
+      signingKey: 123456
+    authServer:
+      supportRefreshToken: true
+      accessTokenValiditySeconds: 7200
+      refreshTokenValiditySeconds: 259200

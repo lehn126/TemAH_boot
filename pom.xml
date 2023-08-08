@@ -12,6 +12,8 @@
     <modules>
         <module>TemAH_common</module>
         <module>TemAH_ahfm</module>
+        <module>TemAH_auth</module>
+        <module>TemAH_auth_client</module>
     </modules>
 
     <groupId>com.temah</groupId>

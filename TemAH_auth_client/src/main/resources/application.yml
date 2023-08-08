@@ -1,0 +1,57 @@
+server:
+  port: 8010
+
+security:
+  oauth2:
+    jwt:
+      enable: true
+      signingKey: 123456
+    client:
+      clientId: client_1
+      clientSecret: 123
+      checkTokenEndpointUrl: http://localhost:7002/oauth/check_token
+
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          gitee:
+            provider: gitee
+            client-id: 9bc30f9caafdb4314162eadfb3d0771158de4970483803f76468994e97582d9e
+            client-secret: 9ea4ab09e03b9e4699e9640f17d9d857fb76402b839a9e7f1a220946cd1b5b82
+            #         rediret-uri 这里一定要与重定向URL一致。如果想要我们的服务器来直接认证的话这里可以采用security写死的在最后加上服务商名称
+            redirect-uri: http://localhost:${server.port}/login/oauth2/code/gitee
+            authorization-grant-type: "authorization_code"
+            client-name: gitee
+            scope: user_info
+          client1:
+            provider: client1
+            client-id: client_1
+            client-secret: 123
+            authorization-grant-type: authorization_code
+            redirect-uri: 'http://localhost:8010/getToken'
+            client-name: client_1
+            scope:
+              - all
+          client2:
+            provider: client2
+            client-id: client_2
+            client-secret: 123
+            authorization-grant-type: authorization_code
+            redirect-uri: 'http://localhost:8010/getToken?client=client_2'
+            client-name: client_2_autoApprove
+            scope:
+              - all
+        provider:
+          gitee:
+            authorization-uri: https://gitee.com/oauth/authorize
+            token-uri: https://gitee.com/oauth/token
+            user-info-uri: https://gitee.com/api/v5/user
+            user-name-attribute: "name"
+          client1:
+            authorization-uri: http://localhost:7002/oauth/authorize
+            token-uri: http://localhost:7002/oauth/token
+          client2:
+            authorization-uri: http://localhost:7002/oauth/authorize
+            token-uri: http://localhost:7002/oauth/token
