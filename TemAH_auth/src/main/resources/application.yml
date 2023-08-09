@@ -1,10 +1,18 @@
 server:
-  port: 7002
+  port: 7001
+
+logging:
+  level:
+    root: INFO
+    org.springframework.web: INFO
+    org.springframework.security: DEBUG
+    org.springframework.security.oauth2: DEBUG
+#    org.springframework.boot.autoconfigure: DEBUG
 
 security:
   oauth2:
     jwt:
-      enable: true
+      enable: false
       signingKey: 123456
     authServer:
       supportRefreshToken: true

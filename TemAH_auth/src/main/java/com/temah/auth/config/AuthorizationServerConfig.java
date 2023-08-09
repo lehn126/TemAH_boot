@@ -201,7 +201,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 // false 授权码模式时, 申请授权码时是跳转到授权页面, true 不跳转页面, 直接获取到授权码
                 .autoApprove(false)
                 // 授权码回调地址
-                .redirectUris("http://localhost:8010/getToken")
+                .redirectUris("https://www.baidu.com")
                 .and()
                 .withClient("client_2")
                 // 该client允许的授权类型（申请令牌的方式）
@@ -213,7 +213,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 // false 授权码模式时, 申请授权码时是跳转到授权页面, true 不跳转页面, 直接获取到授权码
                 .autoApprove(true)
                 // 授权码回调地址
-                .redirectUris("http://localhost:8010/getToken?client=client_2");
+                .redirectUris("https://www.baidu.com");
     }
 
     /**

@@ -1,0 +1,16 @@
+server:
+  port: 8020
+
+logging:
+  level:
+    root: INFO
+    org.springframework.web: TRACE
+    org.springframework.security: TRACE
+    org.springframework.security.oauth2: TRACE
+
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:7002

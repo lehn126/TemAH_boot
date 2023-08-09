@@ -1,57 +1,60 @@
 server:
   port: 8010
 
-security:
-  oauth2:
-    jwt:
-      enable: true
-      signingKey: 123456
-    client:
-      clientId: client_1
-      clientSecret: 123
-      checkTokenEndpointUrl: http://localhost:7002/oauth/check_token
+logging:
+  level:
+    root: INFO
+#    org.springframework.web: TRACE
+#    org.springframework.security: TRACE
+#    org.springframework.security.oauth2: TRACE
+#    org.springframework.boot.autoconfigure: DEBUG
 
 spring:
+  thymeleaf:
+    cache: false
   security:
     oauth2:
       client:
         registration:
-          gitee:
-            provider: gitee
-            client-id: 9bc30f9caafdb4314162eadfb3d0771158de4970483803f76468994e97582d9e
-            client-secret: 9ea4ab09e03b9e4699e9640f17d9d857fb76402b839a9e7f1a220946cd1b5b82
-            #         rediret-uri 这里一定要与重定向URL一致。如果想要我们的服务器来直接认证的话这里可以采用security写死的在最后加上服务商名称
-            redirect-uri: http://localhost:${server.port}/login/oauth2/code/gitee
-            authorization-grant-type: "authorization_code"
-            client-name: gitee
-            scope: user_info
-          client1:
-            provider: client1
+          client1-app:
+            provider: auth-server
             client-id: client_1
             client-secret: 123
             authorization-grant-type: authorization_code
-            redirect-uri: 'http://localhost:8010/getToken'
-            client-name: client_1
+            client-authentication-method: client_secret_basic
+            # Here we have to add a redirect URI containing path /login/oauth2/code/${registrationClientId} to
+            # let OAuth2LoginAuthenticationFilter use granted code to request AccessToken
+            redirect-uri: 'http://127.0.0.1:8010/login/oauth2/code/{registrationId}'
+            client-name: client1_authorization_code
+            # Add all scope we configured in auth server here, else it will cause "insufficient_scope" 403 error.
             scope:
-              - all
-          client2:
-            provider: client2
+              - openid
+              - profile
+              - client1.all
+          client1-authorized:
+            provider: auth-server
+            client-id: client_1
+            client-secret: 123
+            authorization-grant-type: authorization_code
+            client-authentication-method: client_secret_basic
+            redirect-uri: 'http://127.0.0.1:8010/authorized'
+            client-name: client1_authorized
+            scope:
+              - openid
+              - profile
+              - client1.all
+          client2-app:
+            provider: auth-server
             client-id: client_2
             client-secret: 123
             authorization-grant-type: authorization_code
-            redirect-uri: 'http://localhost:8010/getToken?client=client_2'
-            client-name: client_2_autoApprove
+            redirect-uri: '{baseUrl}/{action}/oauth2/code/{registrationId}'
+            client-name: client2_auto_approve
             scope:
-              - all
+              - openid
+              - client2.all
         provider:
-          gitee:
-            authorization-uri: https://gitee.com/oauth/authorize
-            token-uri: https://gitee.com/oauth/token
-            user-info-uri: https://gitee.com/api/v5/user
-            user-name-attribute: "name"
-          client1:
-            authorization-uri: http://localhost:7002/oauth/authorize
-            token-uri: http://localhost:7002/oauth/token
-          client2:
-            authorization-uri: http://localhost:7002/oauth/authorize
-            token-uri: http://localhost:7002/oauth/token
+          auth-server:
+            issuer-uri: http://localhost:7002
+#            user-info-uri: http://127.0.0.1:7002/user
+#            user-name-attribute: id

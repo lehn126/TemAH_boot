@@ -1,0 +1,18 @@
+server:
+  port: 7002
+
+logging:
+  level:
+    root: INFO
+#    org.springframework.web: INFO
+#    org.springframework.security: DEBUG
+#    org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping: TRACE
+#    org.springframework.security.web.FilterChainProxy: TRACE # 过滤器执行顺序
+#    org.springframework.security.web.access.ExceptionTranslationFilter: TRACE #异常处理
+
+security:
+  oauth2:
+    authServer:
+      authCodeValiditySeconds: 300 # 5 minutes
+      accessTokenValiditySeconds: 7200 # 2 hours
+      refreshTokenValiditySeconds: 259200 # 72 hours

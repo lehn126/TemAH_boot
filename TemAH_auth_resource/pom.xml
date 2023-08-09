@@ -7,40 +7,30 @@
         <artifactId>TemAH_boot</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-    <artifactId>TemAH_auth_client</artifactId>
+    <artifactId>TemAH_auth_resource</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>TemAH_auth_client</name>
-    <description>TemAH_auth_client</description>
+    <name>TemAH_auth_resource</name>
+    <description>TemAH_auth_resource</description>
     <properties>
 
     </properties>
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-oauth2-client</artifactId>
+            <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+            <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
         </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-test</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>
