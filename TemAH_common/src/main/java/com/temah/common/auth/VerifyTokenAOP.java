@@ -47,6 +47,8 @@ public class VerifyTokenAOP {
             if (token == null || token.isEmpty()) {
                 throw new AuthException(MsgConstant.TOKEN_MISS_ERROR, "Can't not found token in the request");
             }
+
+            // [ChangeMe] use jwt token validation here for template
             if (!jwtUtil.check(token)) {
                 throw new AuthException(MsgConstant.TOKEN_VALID_ERROR, "Token validation failed");
             }

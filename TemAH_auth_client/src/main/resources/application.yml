@@ -12,6 +12,12 @@ logging:
 spring:
   thymeleaf:
     cache: false
+  redis:
+    host: 192.168.2.105
+    database: 0
+    port: 6379
+    password:
+    timeout: 3000ms
   security:
     oauth2:
       client:
@@ -58,3 +64,7 @@ spring:
             issuer-uri: http://localhost:7002
 #            user-info-uri: http://127.0.0.1:7002/user
 #            user-name-attribute: id
+
+resource:
+  client1:
+    hello: http://127.0.0.1:8020/hello
