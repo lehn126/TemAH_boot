@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.core.userdetails.UserDetailsByNameServiceWrapper;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
@@ -20,6 +21,7 @@ import org.springframework.security.oauth2.provider.code.AuthorizationCodeServic
 import org.springframework.security.oauth2.provider.code.InMemoryAuthorizationCodeServices;
 import org.springframework.security.oauth2.provider.token.*;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
+import org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationProvider;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -127,6 +129,8 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Bean
     public AuthorizationServerTokenServices authorizationServerTokenServices() {
         DefaultTokenServices services = new DefaultTokenServices();
+        // 认证管理器（默认似乎不需要）
+        // services.setAuthenticationManager(authenticationManager);
         // 客户端信息服务
         services.setClientDetailsService(clientDetailsService);
         // 是否产生刷新令牌
@@ -191,7 +195,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 // 客户端id
                 .withClient("client_1")
                 // 该client允许的授权类型（申请令牌的方式）
-                .authorizedGrantTypes("authorization_code","password","implicit","client_credentials","refresh_token")
+                .authorizedGrantTypes("authorization_code", "password", "implicit", "client_credentials", "refresh_token")
                 // 客户端密钥 (使用 password 模式时请求令牌必须)
                 .secret(passwordEncoder.encode("123"))
                 // 客户端可以访问的资源列表
@@ -205,7 +209,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 .and()
                 .withClient("client_2")
                 // 该client允许的授权类型（申请令牌的方式）
-                .authorizedGrantTypes("authorization_code","password","implicit","client_credentials","refresh_token")
+                .authorizedGrantTypes("authorization_code", "password", "implicit", "client_credentials", "refresh_token")
                 // 客户端密钥 (使用 password 模式时请求令牌必须)
                 .secret(passwordEncoder.encode("123"))
                 // 授权范围
