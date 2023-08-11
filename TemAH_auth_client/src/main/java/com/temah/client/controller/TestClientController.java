@@ -43,22 +43,25 @@ public class TestClientController {
         String token = (String) redisUtils.get(REDIS_KEY_OAUTH2_ACCESS_TOKEN);
         Long expiresAt = (Long) redisUtils.get(REDIS_KEY_OAUTH2_ACCESS_TOKEN_EXPIRES);
 
-        logger.info("redis get token {}, expires {}", token, expiresAt);
+        logger.info("get redis OAuth2 access token {}, expires {}", token, expiresAt);
         if (expiresAt != null) {
-            logger.info("redis token will expires at {}",
+            logger.info("redis OAuth2 access token will expires at {}",
                     Instant.ofEpochMilli(expiresAt).atZone(ZoneId.systemDefault()).format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
         }
 
-        if (token == null) {
-            token = oAuth2AuthorizedClient.getAccessToken().getTokenValue();
-            if (oAuth2AuthorizedClient.getAccessToken().getExpiresAt() != null) {
-                expiresAt = oAuth2AuthorizedClient.getAccessToken().getExpiresAt().toEpochMilli();
-            }
-            redisUtils.set(REDIS_KEY_OAUTH2_ACCESS_TOKEN, token);
-            redisUtils.set(REDIS_KEY_OAUTH2_ACCESS_TOKEN_EXPIRES, expiresAt);
-
-            logger.info("redis set token {}, expires {}", token, expiresAt);
+        token = oAuth2AuthorizedClient.getAccessToken().getTokenValue();
+        if (oAuth2AuthorizedClient.getAccessToken().getExpiresAt() != null) {
+            expiresAt = oAuth2AuthorizedClient.getAccessToken().getExpiresAt().toEpochMilli();
         }
+        redisUtils.set(REDIS_KEY_OAUTH2_ACCESS_TOKEN, token);
+        redisUtils.set(REDIS_KEY_OAUTH2_ACCESS_TOKEN_EXPIRES, expiresAt);
+
+        logger.info("redis set token {}, expires at {}", token, expiresAt);
+        if (expiresAt != null) {
+            logger.info("redis OAuth2 access token expires time update to {}",
+                    Instant.ofEpochMilli(expiresAt).atZone(ZoneId.systemDefault()).format(DateTimeFormatter.ISO_LOCAL_DATE_TIME));
+        }
+
         return token;
     }
 
