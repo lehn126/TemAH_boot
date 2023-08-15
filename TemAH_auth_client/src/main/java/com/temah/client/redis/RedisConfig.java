@@ -1,5 +1,6 @@
 package com.temah.client.redis;
 
+import com.temah.common.redis.RedisUtils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
@@ -17,5 +18,10 @@ public class RedisConfig {
         redisTemplate.setHashKeySerializer(new StringRedisSerializer());
         redisTemplate.afterPropertiesSet();
         return redisTemplate;
+    }
+
+    @Bean
+    public RedisUtils redisUtils(RedisTemplate<String, Object> redisTemplate) {
+        return new RedisUtils(redisTemplate);
     }
 }

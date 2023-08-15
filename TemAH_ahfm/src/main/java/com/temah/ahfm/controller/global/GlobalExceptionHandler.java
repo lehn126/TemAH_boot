@@ -1,7 +1,6 @@
 package com.temah.ahfm.controller.global;
 
 import com.temah.common.constant.MsgConstant;
-import com.temah.common.exception.AuthException;
 import com.temah.common.web.RestResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,15 +19,6 @@ import javax.servlet.http.HttpServletRequest;
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
-
-    @ExceptionHandler(AuthException.class)
-    @ResponseBody
-    public Object handleAuthException(AuthException e, HandlerMethod handlerMethod,
-                                      HttpMethod httpMethod, HttpServletRequest httpServletRequest) {
-        logger.error("{} to {} processed by {} error:{}", httpMethod.name(), httpServletRequest.getRequestURI(),
-                handlerMethod.getMethod(), e.getMessage());
-        return RestResult.fail(e.getErrorCode(), e.getMessage());
-    }
 
     @ExceptionHandler(Exception.class)
     @ResponseBody

@@ -1,4 +1,4 @@
-package com.temah.common.exception;
+package com.temah.jwt.exception;
 
 public class AuthException extends RuntimeException {
     private String errorCode;

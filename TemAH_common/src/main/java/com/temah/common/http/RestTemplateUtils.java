@@ -10,6 +10,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,7 +33,8 @@ public class RestTemplateUtils {
                                                    MultiValueMap<String, String> queryParams,
                                                    Class<T> responseType) {
         String reqUrl = putQueryParams(strUrl, queryParams);
-        return restTemplate.getForEntity(reqUrl, responseType, uriVariables);
+        return restTemplate.getForEntity(reqUrl, responseType,
+                uriVariables == null ? Collections.emptyMap() : uriVariables);
     }
 
     public static <T> ResponseEntity<T> processGetWithBearerToken(String strUrl,
@@ -47,7 +49,8 @@ public class RestTemplateUtils {
             Map<String, Object> paramMap = new HashMap<>();
             HttpEntity<Object> httpEntity = new HttpEntity<>(paramMap, headers);
 
-            return restTemplate.exchange(reqUrl, HttpMethod.GET, httpEntity, responseType, uriVariables);
+            return restTemplate.exchange(reqUrl, HttpMethod.GET, httpEntity, responseType,
+                    uriVariables == null ? Collections.emptyMap() : uriVariables);
         } else {
             return processGet(strUrl, uriVariables, queryParams, responseType);
         }
@@ -60,7 +63,8 @@ public class RestTemplateUtils {
                                                     Map<String, String> uriVariables,
                                                     Object request,
                                                     Class<T> responseType) {
-        return restTemplate.postForEntity(strUrl, request, responseType, uriVariables);
+        return restTemplate.postForEntity(strUrl, request, responseType,
+                uriVariables == null ? Collections.emptyMap() : uriVariables);
     }
 
     public static <T> ResponseEntity<T> processPostWithBearerToken(String strUrl,
@@ -74,7 +78,8 @@ public class RestTemplateUtils {
             Map<String, Object> paramMap = new HashMap<>();
             HttpEntity<Object> httpEntity = new HttpEntity<>(paramMap, headers);
 
-            return restTemplate.exchange(strUrl, HttpMethod.POST, httpEntity, responseType, uriVariables);
+            return restTemplate.exchange(strUrl, HttpMethod.POST, httpEntity, responseType,
+                    uriVariables == null ? Collections.emptyMap() : uriVariables);
         } else {
             return processPost(strUrl, uriVariables, request, responseType);
         }

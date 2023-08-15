@@ -26,19 +26,19 @@
         </javaTypeResolver>
 
         <!-- javabean生成的地方 -->
-        <javaModelGenerator targetPackage="com.carl.test.boot.model" targetProject="src/main/java">
+        <javaModelGenerator targetPackage="com.temah.ahfm.model" targetProject="src/main/java">
             <property name="enableSubPackages" value="true" />
             <!-- 从数据库返回的值被清理前后的空格 -->
             <property name="trimStrings" value="true" />
         </javaModelGenerator>
 
         <!-- mapper xml生成的地方 -->
-        <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources">
+        <sqlMapGenerator targetPackage="mapper.alarm" targetProject="src/main/resources">
             <property name="enableSubPackages" value="true" />
         </sqlMapGenerator>
 
         <!-- mapper class生成的地方 -->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.carl.test.boot.mapper" targetProject="src/main/java">
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.temah.ahfm.mapper" targetProject="src/main/java">
             <property name="enableSubPackages" value="true" />
         </javaClientGenerator>
 

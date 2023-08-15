@@ -9,7 +9,7 @@ public class PagingResult implements Serializable{
 
 	private static final long serialVersionUID = 1416867284825483785L;
 
-	private int pageIndex; // 当前是第几页
+	private int pageIndex; // 当前是第几页(从1开始)
 
 	private int pageSize; // 每页多少条数据
 

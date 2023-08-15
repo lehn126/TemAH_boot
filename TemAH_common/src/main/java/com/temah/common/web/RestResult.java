@@ -36,6 +36,14 @@ public class RestResult implements Serializable{
 	}
 
 	/**
+	 * 返回
+	 * @param errCode
+	 */
+	public RestResult(String errCode) {
+		this.errCode = errCode;
+	}
+
+	/**
 	 * 成功返回
 	 * @param errCode
 	 * @param data
@@ -57,8 +65,16 @@ public class RestResult implements Serializable{
 		}
 	}
 
+	public static RestResult success() {
+		return new RestResult(SUCCESS);
+	}
+
 	public static RestResult success(Object data) {
 		return new RestResult(SUCCESS,data);
+	}
+
+	public static RestResult fail(String errCode) {
+		return new RestResult(errCode);
 	}
 
 	public static RestResult fail(String errCode, Object data) {

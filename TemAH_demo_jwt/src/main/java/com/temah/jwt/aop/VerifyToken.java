@@ -1,4 +1,4 @@
-package com.temah.common.auth;
+package com.temah.jwt.aop;
 
 import java.lang.annotation.*;
 

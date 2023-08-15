@@ -11,11 +11,14 @@
 
     <modules>
         <module>TemAH_common</module>
+        <module>TemAH_common_redis</module>
+        <module>TemAH_demo_jwt</module>
         <module>TemAH_ahfm</module>
         <module>TemAH_auth</module>
         <module>TemAH_auth_server</module>
         <module>TemAH_auth_client</module>
         <module>TemAH_auth_resource</module>
+        <module>TemAH_lam</module>
     </modules>
 
     <groupId>com.temah</groupId>

@@ -1,20 +1,19 @@
 package com.temah.client.controller;
 
-import com.temah.client.redis.RedisUtils;
+import com.temah.common.http.RestTemplateUtils;
+import com.temah.common.redis.RedisUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
 import org.springframework.security.oauth2.client.annotation.RegisteredOAuth2AuthorizedClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
 
 import java.time.Instant;
 import java.time.ZoneId;
@@ -27,8 +26,6 @@ import java.util.Objects;
 public class TestClientController {
 
     Logger logger = LoggerFactory.getLogger(TestClientController.class);
-
-    private final RestTemplate restTemplate = new RestTemplate();
 
     @Value("${resource.client1.hello:}")
     private String resource1URL;
@@ -80,7 +77,8 @@ public class TestClientController {
         Map<String, Object> paramMap = new HashMap<>();
         HttpEntity<Object> httpEntity = new HttpEntity<>(paramMap, headers);
         logger.info("Send request to {}, access token: {}", resource1URL, accessToken);
-        return restTemplate.exchange(resource1URL, HttpMethod.GET, httpEntity, String.class);
+        return RestTemplateUtils.processGetWithBearerToken(
+                resource1URL, null, null, accessToken, String.class);
     }
 
     @GetMapping("/authorized")

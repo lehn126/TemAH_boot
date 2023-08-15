@@ -1,4 +1,4 @@
-package com.temah.common.auth;
+package com.temah.jwt.jwt;
 
 public class JWTPayload {
     private String userName;

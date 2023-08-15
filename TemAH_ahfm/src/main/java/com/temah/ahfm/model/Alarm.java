@@ -17,6 +17,10 @@ public class Alarm implements Serializable {
 
     private String specificProblem;
 
+    private Integer clearFlag;
+
+    private Integer terminateState;
+
     private String additionalText;
 
     private static final long serialVersionUID = 1L;
@@ -75,6 +79,22 @@ public class Alarm implements Serializable {
 
     public void setSpecificProblem(String specificProblem) {
         this.specificProblem = specificProblem == null ? null : specificProblem.trim();
+    }
+
+    public Integer getClearFlag() {
+        return clearFlag;
+    }
+
+    public void setClearFlag(Integer clearFlag) {
+        this.clearFlag = clearFlag;
+    }
+
+    public Integer getTerminateState() {
+        return terminateState;
+    }
+
+    public void setTerminateState(Integer terminateState) {
+        this.terminateState = terminateState;
     }
 
     public String getAdditionalText() {

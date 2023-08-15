@@ -1,8 +1,9 @@
-package com.temah.common.auth;
+package com.temah.jwt.aop;
 
 
+import com.temah.jwt.jwt.JWTUtil;
 import com.temah.common.constant.MsgConstant;
-import com.temah.common.exception.AuthException;
+import com.temah.jwt.exception.AuthException;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -30,10 +31,13 @@ public class VerifyTokenAOP {
         this.jwtUtil = jwtUtil;
     }
 
-    @Pointcut("@annotation(com.temah.common.auth.VerifyToken)")
+    @Pointcut("@annotation(com.temah.jwt.aop.VerifyToken)")
     public void annotationPointCut() {
     }
 
+    /**
+     * 检查request header中的 Authorization 属性存储的jwt token是否有效
+     */
     @Around("annotationPointCut()")
     public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
         RequestAttributes attributes = RequestContextHolder.getRequestAttributes();
