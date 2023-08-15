@@ -18,26 +18,32 @@ public abstract class BaseService <T, ID extends Serializable> {
     }
 
     @Transactional(readOnly = false)
-    public void create(T entity) {
-        mapper.insertSelective(entity);
+    public int create(T entity) {
+        return mapper.insertSelective(entity);
     }
 
     @Transactional(readOnly = false)
-    public void batchCreate(List<T> list) {
-        mapper.batchInsert(list);
+    public int batchCreate(List<T> list) {
+        return mapper.batchInsert(list);
     }
 
     @Transactional(readOnly = false)
-    public void update(T entity) throws Exception {
+    public int update(T entity) throws Exception {
         int affectedRows = mapper.updateByPrimaryKeySelective(entity);
         if(affectedRows == 0) {
             throw new RuntimeException(MsgConstant.UPDATE_FAILED);
         }
+        return affectedRows;
     }
 
     @Transactional(readOnly = false)
-    public void delete(List<ID> ids){
-        mapper.deleteByPrimaryKeys(ids);
+    public int delete(ID id) {
+        return mapper.deleteByPrimaryKey(id);
+    }
+
+    @Transactional(readOnly = false)
+    public int delete(List<ID> ids) {
+        return mapper.deleteByPrimaryKeys(ids);
     }
 
     @Transactional(readOnly = true)

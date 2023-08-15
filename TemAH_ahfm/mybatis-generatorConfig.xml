@@ -3,7 +3,7 @@
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 <generatorConfiguration>
     <!-- 数据库访问的驱动包 -->
-    <classPathEntry location="./mysql-connector-j-8.0.33.jar" />
+    <classPathEntry location="../mysql-connector-j-8.0.33.jar" />
 
     <context id="simple" targetRuntime="MyBatis3">
         <property name="javaFileEncoding" value="UTF-8"/>

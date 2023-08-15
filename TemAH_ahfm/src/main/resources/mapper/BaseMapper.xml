@@ -50,8 +50,8 @@
 <!--            #{st.probableCause,jdbcType=VARCHAR},-->
 <!--            #{st.perceivedSeverity,jdbcType=VARCHAR},-->
 <!--            #{st.specificProblem,jdbcType=VARCHAR},-->
-<!--            #{clearFlag,jdbcType=INTEGER},-->
-<!--            #{terminateState,jdbcType=INTEGER},-->
+<!--            #{st.clearFlag,jdbcType=INTEGER},-->
+<!--            #{st.terminateState,jdbcType=INTEGER},-->
 <!--            #{st.additionalText,jdbcType=LONGVARCHAR}-->
 <!--            )-->
 <!--        </foreach>-->

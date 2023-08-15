@@ -1,1 +1,1 @@
-java -jar mybatis-generator-core-1.4.2.jar -configfile mybatis-generatorConfig.xml
+java -jar ../mybatis-generator-core-1.4.2.jar -configfile mybatis-generatorConfig.xml

@@ -77,7 +77,7 @@ public class RemotePlatformStateTask {
             double ratio = RemotePlatformStateCollector.getUsedCpuWithCMD(
                     info.getUser(), info.getPasswd(), info.getHost(), info.getPort());
             LocalDateTime time = LocalDateTime.now();
-            logger.info("远程主机CPU占用率{}: [{}:{}] {}%", time, info.getHost(), info.getPort(), ratio);
+            logger.info("远程主机CPU占用率 {}: [{}:{}] {}%", time, info.getHost(), info.getPort(), ratio);
             if (info.getLimit() != null && !info.getLimit().isEmpty()) {
                 Double limit = Double.valueOf(info.getLimit());
                 if (limit.compareTo(ratio) < 0) {
@@ -95,7 +95,7 @@ public class RemotePlatformStateTask {
             double ratio = RemotePlatformStateCollector.getUsedMemoryWithCMD(
                     info.getUser(), info.getPasswd(), info.getHost(), info.getPort());
             LocalDateTime time = LocalDateTime.now();
-            logger.info("远程主机内存占用率{}: [{}:{}] {}%", time, info.getHost(), info.getPort(), ratio);
+            logger.info("远程主机内存占用率 {}: [{}:{}] {}%", time, info.getHost(), info.getPort(), ratio);
             if (info.getLimit() != null && !info.getLimit().isEmpty()) {
                 Double limit = Double.valueOf(info.getLimit());
                 if (limit.compareTo(ratio) < 0) {

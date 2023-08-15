@@ -8,7 +8,7 @@ public interface BaseMapper<T, ID extends Serializable> {
     /**
      * 由 mybatis-generator 产生
      */
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(ID id);
 
     int deleteByPrimaryKeys(List<ID> ids);
 
