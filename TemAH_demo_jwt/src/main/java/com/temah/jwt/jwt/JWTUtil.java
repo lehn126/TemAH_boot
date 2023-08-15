@@ -17,7 +17,7 @@ public class JWTUtil {
 
     public static final String DEFAULT_SIGNING_KEY = "mySigningKey";
 
-    @Value("jwt.signingKey")
+    @Value("${jwt.signingKey:mySigningKey}")
     private String signingKey = DEFAULT_SIGNING_KEY;
 
     public String getSigningKey() {
