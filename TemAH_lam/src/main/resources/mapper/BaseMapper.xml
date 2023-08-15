@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="base">
+    <!-- 默认按照更新时间排序 -->
+    <sql id="pagination">
+        order by
+        <choose>
+            <when test="sortBy!=null and sortBy != ''">${sortBy}</when>
+            <otherwise>${defaultSortField}</otherwise>
+        </choose>
+        <choose>
+            <when test="sortOrder =='asc'">asc</when>
+            <when test="sortOrder =='desc'">desc</when>
+            <otherwise>${defaultSortOrder}</otherwise>
+        </choose>
+        LIMIT
+        <choose>
+            <when test="offset != null">#{offset},</when>
+            <otherwise>0,</otherwise>
+        </choose>
+        <choose>
+            <when test="pageSize != null">#{pageSize}</when>
+            <otherwise>2147483647</otherwise>
+        </choose>
+    </sql>
+
+    <!-- 以下为SQL配置例子 -->
+    <!-- 批量插入记录 -->
+<!--    <insert id="batchInsert" parameterType="list">-->
+<!--        insert into schedule-->
+<!--        (-->
+<!--        id,-->
+<!--        eventTime,-->
+<!--        managedObject,-->
+<!--        alarmType,-->
+<!--        probableCause,-->
+<!--        perceivedSeverity,-->
+<!--        specificProblem,-->
+<!--        clearFlag,-->
+<!--        terminateState,-->
+<!--        additionalText-->
+<!--        )-->
+<!--        values-->
+<!--        <foreach collection="list" item="st" index="index" separator=",">-->
+<!--            (-->
+<!--            #{st.id,jdbcType=INTEGER},-->
+<!--            #{st.eventTime,jdbcType=VARCHAR},-->
+<!--            #{st.managedObject,jdbcType=VARCHAR},-->
+<!--            #{st.alarmType,jdbcType=VARCHAR},-->
+<!--            #{st.probableCause,jdbcType=VARCHAR},-->
+<!--            #{st.perceivedSeverity,jdbcType=VARCHAR},-->
+<!--            #{st.specificProblem,jdbcType=VARCHAR},-->
+<!--            #{clearFlag,jdbcType=INTEGER},-->
+<!--            #{terminateState,jdbcType=INTEGER},-->
+<!--            #{st.additionalText,jdbcType=LONGVARCHAR}-->
+<!--            )-->
+<!--        </foreach>-->
+<!--    </insert>-->
+    <!-- 删除，需要删除 mybatis-generator 生成的同名配置!!! -->
+<!--    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">-->
+<!--        update schedule set terminateState = '1'-->
+<!--        where id = #{id,jdbcType=INTEGER}-->
+<!--    </delete>-->
+    <!-- 批量删除，真实项目中这里需要修改为 update 如：
+    update schedule set status = '-1'
+     -->
+<!--    <delete id="deleteByPrimaryKeys" parameterType="list">-->
+<!--        update schedule set terminateState = '1'-->
+<!--        where id IN-->
+<!--        <foreach collection="list" item="id" index="index" open="("-->
+<!--                 separator="," close=")">-->
+<!--            #{id}-->
+<!--        </foreach>-->
+<!--    </delete>-->
+    <!-- 为分页查询提供模糊筛选参数处理 -->
+<!--    <sql id="searchParams">-->
+<!--        <trim prefix="where" prefixOverrides="AND|OR">-->
+<!--            <if test="keyword != null and keyword != ''">-->
+<!--                and (t.managedObject like concat('%',#{keyword},'%') or t.additionalText like concat('%',#{keyword},'%'))-->
+<!--            </if>-->
+<!--            and t.terminateState != '1'-->
+<!--            and t.id > 0-->
+<!--        </trim>-->
+<!--    </sql>-->
+    <!-- 为分页查询提供记录总数量计算及模糊筛选 -->
+<!--    <select id="countByCriteria" parameterType="Map" resultType="java.lang.Long">-->
+<!--        SELECT count(t.id) from schedule t-->
+<!--        <if test="_parameter != null">-->
+<!--            <include refid="searchParams" />-->
+<!--        </if>-->
+<!--    </select>-->
+    <!-- 分页查询列表包括模糊筛选 -->
+<!--    <select id="selectByCriteriaWithPage" parameterType="Map" resultType="Map">-->
+<!--        select-->
+<!--        <include refid="Base_Column_List" />-->
+<!--        ,-->
+<!--        <include refid="Blob_Column_List" />-->
+<!--        from schedule t-->
+<!--        <if test="_parameter != null">-->
+<!--            <include refid="searchParams" />-->
+<!--        </if>-->
+<!--        <include refid="base.pagination">-->
+<!--            <property name="defaultSortField" value="id"/>-->
+<!--            <property name="defaultSortOrder" value="desc"/>-->
+<!--        </include>-->
+<!--    </select>-->
+
+</mapper>

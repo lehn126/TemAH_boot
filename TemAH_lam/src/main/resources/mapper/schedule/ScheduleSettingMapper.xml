@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.temah.lam.mapper.ScheduleSettingMapper">
+  <resultMap id="BaseResultMap" type="com.temah.lam.model.ScheduleSetting">
+    <id column="job_id" jdbcType="INTEGER" property="jobId" />
+    <result column="bean_name" jdbcType="VARCHAR" property="beanName" />
+    <result column="method_name" jdbcType="VARCHAR" property="methodName" />
+    <result column="method_params" jdbcType="VARCHAR" property="methodParams" />
+    <result column="cron_expression" jdbcType="VARCHAR" property="cronExpression" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="job_status" jdbcType="INTEGER" property="jobStatus" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    job_id, bean_name, method_name, method_params, cron_expression, remark, job_status,
+    create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from schedule_setting
+    where job_id = #{jobId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from schedule_setting
+    where job_id = #{jobId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.temah.lam.model.ScheduleSetting">
+    insert into schedule_setting (job_id, bean_name, method_name,
+      method_params, cron_expression, remark,
+      job_status, create_time, update_time
+      )
+    values (#{jobId,jdbcType=INTEGER}, #{beanName,jdbcType=VARCHAR}, #{methodName,jdbcType=VARCHAR},
+      #{methodParams,jdbcType=VARCHAR}, #{cronExpression,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR},
+      #{jobStatus,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.temah.lam.model.ScheduleSetting">
+    insert into schedule_setting
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="jobId != null">
+        job_id,
+      </if>
+      <if test="beanName != null">
+        bean_name,
+      </if>
+      <if test="methodName != null">
+        method_name,
+      </if>
+      <if test="methodParams != null">
+        method_params,
+      </if>
+      <if test="cronExpression != null">
+        cron_expression,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="jobStatus != null">
+        job_status,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="jobId != null">
+        #{jobId,jdbcType=INTEGER},
+      </if>
+      <if test="beanName != null">
+        #{beanName,jdbcType=VARCHAR},
+      </if>
+      <if test="methodName != null">
+        #{methodName,jdbcType=VARCHAR},
+      </if>
+      <if test="methodParams != null">
+        #{methodParams,jdbcType=VARCHAR},
+      </if>
+      <if test="cronExpression != null">
+        #{cronExpression,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="jobStatus != null">
+        #{jobStatus,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.temah.lam.model.ScheduleSetting">
+    update schedule_setting
+    <set>
+      <if test="beanName != null">
+        bean_name = #{beanName,jdbcType=VARCHAR},
+      </if>
+      <if test="methodName != null">
+        method_name = #{methodName,jdbcType=VARCHAR},
+      </if>
+      <if test="methodParams != null">
+        method_params = #{methodParams,jdbcType=VARCHAR},
+      </if>
+      <if test="cronExpression != null">
+        cron_expression = #{cronExpression,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="jobStatus != null">
+        job_status = #{jobStatus,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where job_id = #{jobId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.temah.lam.model.ScheduleSetting">
+    update schedule_setting
+    set bean_name = #{beanName,jdbcType=VARCHAR},
+      method_name = #{methodName,jdbcType=VARCHAR},
+      method_params = #{methodParams,jdbcType=VARCHAR},
+      cron_expression = #{cronExpression,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      job_status = #{jobStatus,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where job_id = #{jobId,jdbcType=INTEGER}
+  </update>
+
+
+  <!-- 批量插入记录 -->
+      <insert id="batchInsert" parameterType="list">
+        insert into schedule_setting
+        (
+        job_id,
+        bean_name,
+        method_name,
+        method_params,
+        cron_expression,
+        remark,
+        job_status,
+        create_time,
+        update_time
+        )
+        values
+        <foreach collection="list" item="st" index="index" separator=",">
+          (
+          #{st.jobId,jdbcType=INTEGER},
+          #{st.beanName,jdbcType=VARCHAR},
+          #{st.methodName,jdbcType=VARCHAR},
+          #{st.methodParams,jdbcType=VARCHAR},
+          #{st.cronExpression,jdbcType=VARCHAR},
+          #{st.remark,jdbcType=VARCHAR},
+          #{st.jobStatus,jdbcType=INTEGER},
+          #{st.createTime,jdbcType=TIMESTAMP},
+          #{st.updateTime,jdbcType=TIMESTAMP}
+          )
+        </foreach>
+      </insert>
+  <!-- 批量删除 -->
+      <delete id="deleteByPrimaryKeys" parameterType="list">
+          delete from schedule_setting
+          where job_id IN
+          <foreach collection="list" item="id" index="index" open="("
+                   separator="," close=")">
+              #{id}
+          </foreach>
+      </delete>
+  <!-- 为分页查询提供模糊筛选参数处理 -->
+      <sql id="searchParams">
+          <trim prefix="where" prefixOverrides="AND|OR">
+              <if test="keyword != null and keyword != ''">
+                  and (t.beanName like concat('%',#{keyword},'%') or t.methodName like concat('%',#{keyword},'%'))
+              </if>
+              and t.job_id > 0
+          </trim>
+      </sql>
+  <!-- 为分页查询提供记录总数量计算及模糊筛选 -->
+      <select id="countByCriteria" parameterType="Map" resultType="java.lang.Long">
+          SELECT count(t.job_id) from schedule_setting t
+          <if test="_parameter != null">
+              <include refid="searchParams" />
+          </if>
+      </select>
+  <!-- 分页查询列表包括模糊筛选 -->
+      <select id="selectByCriteriaWithPage" parameterType="Map" resultType="Map">
+          select
+          <include refid="Base_Column_List" />
+          from schedule_setting t
+          <if test="_parameter != null">
+              <include refid="searchParams" />
+          </if>
+          <include refid="base.pagination">
+              <property name="defaultSortField" value="job_id"/>
+              <property name="defaultSortOrder" value="desc"/>
+          </include>
+      </select>
+
+      <select id="selectByJobStatus" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from schedule_setting t
+        <if test="jobStatus != null">
+          <trim prefix="where" prefixOverrides="AND|OR">
+            and t.job_status = #{jobStatus,jdbcType=INTEGER}
+            and t.job_id > 0
+          </trim>
+        </if>
+        order by t.job_id asc
+      </select>
+</mapper>
