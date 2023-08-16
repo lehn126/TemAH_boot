@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.InputStream;
 import java.nio.charset.Charset;
+import java.util.Properties;
 
 /**
  * 通过SSH连接到远程服务器执行命令
@@ -24,17 +25,18 @@ public class RemoteExec {
             session = jsch.getSession(user, host, port);
             session.setPassword(passwd);
 
-            java.util.Properties config = new java.util.Properties();
+            Properties config = new Properties();
             config.put("StrictHostKeyChecking", "no");
             session.setConfig(config);
 
             session.connect();
         } catch (JSchException e) {
-            System.out.println("connect error !");
+            logger.error("远程连接错误: [{}:{}] {}", host, port, e.getMessage(), e);
             if (session != null) {
                 try {
                     session.disconnect();
-                } catch (Exception ignored) {
+                } catch (Exception e1) {
+                    logger.error("关闭远程连接遇到错误: [{}:{}] {}", host, port, e1.getMessage(), e1);
                 }
             }
             session = null;
@@ -61,9 +63,9 @@ public class RemoteExec {
             is = channel.getInputStream();
             result = ExecUtils.getInString(is, ouputCharset);
 
-            logger.info("执行远程命令：[{}:{}] {} 执行结果--<{}>--", host, port, cm, result);
+            logger.info("执行远程命令: [{}:{}] {} 输出--<{}>--", host, port, cm, result);
         } catch (Exception e) {
-            logger.error(e.getMessage());
+            logger.error("执行远程命令遇到错误: [{}:{}] {}", host, port, e.getMessage(), e);
         } finally {
             try {
                 if (null != is) {
@@ -74,9 +76,8 @@ public class RemoteExec {
                 }
                 session.disconnect();
             } catch (Exception e) {
-                logger.error(e.getMessage());
+                logger.error("关闭远程连接遇到错误: [{}:{}] {}", host, port, e.getMessage(), e);
             }
-
         }
         return result;
     }

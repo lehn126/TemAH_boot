@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication(scanBasePackages = "com.temah.*")
-public class TemAhLAMApplication {
+public class TemAhLamApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(TemAhLAMApplication.class, args);
+        SpringApplication.run(TemAhLamApplication.class, args);
     }
 
 }

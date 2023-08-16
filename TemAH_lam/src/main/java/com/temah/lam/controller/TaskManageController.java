@@ -1,5 +1,8 @@
 package com.temah.lam.controller;
 
+import com.temah.common.page.PagingResult;
+import com.temah.common.web.BaseController;
+import com.temah.common.web.BaseService;
 import com.temah.common.web.RestResult;
 import com.temah.lam.model.ScheduleSetting;
 import com.temah.lam.scheduling.CronTaskRegistrar;
@@ -8,16 +11,23 @@ import com.temah.lam.service.ScheduleSettingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/task")
-public class TaskManageController {
+public class TaskManageController extends BaseController<ScheduleSetting, Integer> {
     @Autowired
     private CronTaskRegistrar cronTaskRegistrar;
 
-    @Autowired
     ScheduleSettingService scheduleSettingService;
+
+    public TaskManageController(ScheduleSettingService service) {
+        super(service);
+        this.scheduleSettingService = service;
+    }
 
     /**
      * 添加定时任务
@@ -105,5 +115,17 @@ public class TaskManageController {
             }
         }
         return RestResult.success(affectedRows);
+    }
+
+    @GetMapping("/getAll")
+    public RestResult findWith(@RequestParam(name = "sortBy", required = false) String sortBy,
+                               @RequestParam(name = "sortOrder", required = false) String sortOrder,
+                               @RequestParam(name = "pageIndex", required = false) Integer pageIndex,
+                               @RequestParam(name = "pageSize", required = false) Integer pageSize,
+                               HttpServletRequest request) {
+        Map<String, Object> params = new HashMap<>();
+        setPageWithSort(params, sortBy, sortOrder, pageIndex, pageSize, request);
+        PagingResult pr = service.findByCriteria(params);
+        return RestResult.success(pr);
     }
 }

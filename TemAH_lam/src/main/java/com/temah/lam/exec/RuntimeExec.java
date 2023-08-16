@@ -36,9 +36,9 @@ public class RuntimeExec {
                 result = ExecUtils.getInString(is, ouputCharset);
             }
 
-            logger.info("执行命令：{} 执行结果--<{}>--", cm, result);
+            logger.info("执行命令: {} 输出--<{}>--", cm, result);
         } catch (Exception e) {
-            logger.error(e.getMessage());
+            logger.error("执行命令遇到错误: {}", e.getMessage(), e);
         } finally {
             try {
                 if (null != ps) {
@@ -51,7 +51,7 @@ public class RuntimeExec {
                     ps.destroy();
                 }
             } catch (Exception e) {
-                logger.error(e.getMessage());
+                logger.error("关闭输入流遇到错误: {}", e.getMessage(), e);
             }
         }
         return result;

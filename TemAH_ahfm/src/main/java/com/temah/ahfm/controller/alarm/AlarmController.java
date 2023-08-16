@@ -1,11 +1,10 @@
 package com.temah.ahfm.controller.alarm;
 
 import com.temah.ahfm.model.Alarm;
+import com.temah.ahfm.service.AlarmService;
 import com.temah.common.page.PagingResult;
 import com.temah.common.web.BaseController;
-import com.temah.common.web.BaseService;
 import com.temah.common.web.RestResult;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,9 +18,11 @@ import java.util.stream.Collectors;
 @RequestMapping("/alarm")
 public class AlarmController extends BaseController<Alarm, Integer> {
 
-    @Autowired
-    public AlarmController(BaseService<Alarm, Integer> service) {
+    private AlarmService alarmService;
+
+    public AlarmController(AlarmService service) {
         super(service);
+        this.alarmService = service;
     }
 
     @PostMapping("/new")
@@ -56,6 +57,15 @@ public class AlarmController extends BaseController<Alarm, Integer> {
 
         service.update(alarm);
         return RestResult.success();
+    }
+
+    @PostMapping("/clear")
+    public RestResult clearAlarm(@RequestParam(name = "id") Integer id, HttpServletRequest request) {
+        if(id == null){
+            throw new IllegalArgumentException("缺少必填值");
+        }
+
+        return RestResult.success(alarmService.clearAlarm(id));
     }
 
     @GetMapping("/getAll")
