@@ -40,12 +40,10 @@
         <dependency>
             <groupId>com.temah</groupId>
             <artifactId>TemAH_common</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.temah</groupId>
             <artifactId>TemAH_common_redis</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
         </dependency>
 
         <dependency>
