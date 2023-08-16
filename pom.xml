@@ -19,6 +19,7 @@
         <module>TemAH_auth_client</module>
         <module>TemAH_auth_resource</module>
         <module>TemAH_lam</module>
+        <module>TemAH_monitor</module>
     </modules>
 
     <groupId>com.temah</groupId>

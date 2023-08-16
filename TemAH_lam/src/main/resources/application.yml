@@ -11,10 +11,31 @@ spring:
     url: jdbc:mysql://192.168.2.105:3306/test
     username: root
     password: 123456
+  boot:
+    admin:
+      client:
+        url: http://localhost:9010 # Spring Boot Admin Server URL用于注册
+        instance:
+          service-host-type: ip # 使用ip注册进来
+        username: admin # Spring Boot Admin Server 注册使用的账户密码
+        password: admin
+
 mybatis:
   config-location: classpath:mybatis/mybatis-config.xml
   mapper-locations: classpath:mapper/*.xml,classpath:mapper/**/*.xml
   type-aliases-package: com.temah.lam.model
+
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: '*' # 通过http暴露所有端点
+  info:
+    env:
+      enabled: true # 启用env信息
 
 lam:
   push:
