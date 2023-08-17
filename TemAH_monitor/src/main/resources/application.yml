@@ -2,7 +2,11 @@ server:
   port: 9010
 
 spring:
+  application:
+    name: temah.monitor
   security: # 配置登录用户名和密码
     user:
       name: "admin"
       password: "admin"
+  thymeleaf: # 去掉启动模板检查WARN
+    check-template-location: false

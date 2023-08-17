@@ -15,7 +15,11 @@ import java.util.*;
 
 public class RestTemplateUtils {
 
-    private static final RestTemplate restTemplate = new RestTemplate();
+    private RestTemplate restTemplate;
+
+    public RestTemplateUtils(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
+    }
 
     private static String putQueryParams(String strUrl, MultiValueMap<String, String> queryParams) {
         UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(strUrl);
@@ -27,7 +31,7 @@ public class RestTemplateUtils {
         return reqUrl;
     }
 
-    public static <T> ResponseEntity<T> processGet(String strUrl,
+    public <T> ResponseEntity<T> processGet(String strUrl,
                                                    Map<String, String> uriVariables,
                                                    MultiValueMap<String, String> queryParams,
                                                    Class<T> responseType) {
@@ -36,7 +40,7 @@ public class RestTemplateUtils {
                 uriVariables == null ? Collections.emptyMap() : uriVariables);
     }
 
-    public static <T> ResponseEntity<T> processGetWithBearerToken(String strUrl,
+    public <T> ResponseEntity<T> processGetWithBearerToken(String strUrl,
                                                                   Map<String, String> uriVariables,
                                                                   MultiValueMap<String, String> queryParams,
                                                                   String bearerToken,
@@ -58,17 +62,19 @@ public class RestTemplateUtils {
     /**
      * If parameter 'request' is a Map, then it should be a MultiValueMap instance like LinkedMultiValueMap
      */
-    public static <T> ResponseEntity<T> processPost(String strUrl,
-                                                    Map<String, String> uriVariables,
-                                                    Object request,
-                                                    Class<T> responseType) {
+    public <T> ResponseEntity<T> processPost(String strUrl,
+                                             Map<String, String> uriVariables,
+                                             HttpEntity<Object> request,
+                                             Class<T> responseType) {
         return restTemplate.postForEntity(strUrl, request, responseType,
                 uriVariables == null ? Collections.emptyMap() : uriVariables);
     }
 
     private static HttpHeaders putRequestHeaders(MediaType contentType, Map<String, String> headers) {
         HttpHeaders requestHeaders = new HttpHeaders();
-        requestHeaders.setContentType(contentType);
+        if (contentType != null) {
+            requestHeaders.setContentType(contentType);
+        }
         if (headers != null && !headers.isEmpty()) {
             Set<Map.Entry<String, String>> entries = headers.entrySet();
             for (Map.Entry<String, String> entry : entries) {

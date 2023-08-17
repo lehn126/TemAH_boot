@@ -43,6 +43,7 @@ management: # actuator打开SpringBoot Admin使用的监控端点
 
 lam:
   push:
+    address: "127.0.0.1:8001"
     restful:
       enable: true
-      uri: http://127.0.0.1:8001/alarm/new
+      uri: http://${lam.push.address}/alarm/new

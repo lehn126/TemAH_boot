@@ -145,4 +145,17 @@ public class AlarmDto {
             return alarmDto;
         }
     }
+
+    @Override
+    public String toString() {
+        return super.toString() + " {" +
+                "eventTime:" + eventTime + "," +
+                "managedObject:" + managedObject + "," +
+                "alarmType:" + alarmType + "," +
+                "probableCause:" + probableCause + "," +
+                "perceivedSeverity:" + perceivedSeverity + "," +
+                "specificProblem:" + specificProblem + "," +
+                "additionalText:" + additionalText +
+                "}";
+    }
 }

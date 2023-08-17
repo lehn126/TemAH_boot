@@ -33,6 +33,9 @@ public class TestClientController {
     @Autowired
     private RedisUtils redisUtils;
 
+    @Autowired
+    private RestTemplateUtils restTemplateUtils;
+
     public static final String REDIS_KEY_OAUTH2_ACCESS_TOKEN = "OAUTH2_ACCESS_TOKEN";
     public static final String REDIS_KEY_OAUTH2_ACCESS_TOKEN_EXPIRES = "OAUTH2_ACCESS_TOKEN_EXPIRES";
 
@@ -77,7 +80,7 @@ public class TestClientController {
         Map<String, Object> paramMap = new HashMap<>();
         HttpEntity<Object> httpEntity = new HttpEntity<>(paramMap, headers);
         logger.info("Send request to {}, access token: {}", resource1URL, accessToken);
-        return RestTemplateUtils.processGetWithBearerToken(
+        return restTemplateUtils.processGetWithBearerToken(
                 resource1URL, null, null, accessToken, String.class);
     }
 
