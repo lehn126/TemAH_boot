@@ -15,9 +15,9 @@ class TemAhLamApplicationTests {
     @Test
     void contextLoads() {
         SchedulingRunnable scheduledTask = new SchedulingRunnable(
-                "remotePlatformStateTask", "getUsedMemory",
-                "carl##123456##192.168.2.129##22##10");
-        cronTaskRegistrar.addCronTask(scheduledTask, "0/5 * * * * ?");
+                "localPlatformStateTask", "getUsedMemory",
+                "20");
+        cronTaskRegistrar.addCronTask(scheduledTask, "0/10 * * * * ?");
         try {
             Thread.sleep(60000L);
         } catch (Exception ignored) {

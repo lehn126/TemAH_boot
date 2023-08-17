@@ -6,6 +6,8 @@ server:
       enabled: true
 
 spring:
+  application:
+    name: temah.ahfm
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://192.168.2.105:3306/test
@@ -22,10 +24,12 @@ spring:
 
 mybatis:
   config-location: classpath:mybatis/mybatis-config.xml
-  mapper-locations: classpath:mapper/*.xml,classpath:mapper/**/*.xml
+  mapper-locations:
+    - classpath:mapper/*.xml
+    - classpath:mapper/**/*.xml
   type-aliases-package: com.temah.ahfm.model
 
-management:
+management: # actuator打开SpringBoot Admin使用的监控端点
   endpoint:
     health:
       show-details: always
