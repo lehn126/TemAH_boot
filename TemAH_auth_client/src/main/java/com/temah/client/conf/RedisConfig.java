@@ -1,4 +1,4 @@
-package com.temah.client.redis;
+package com.temah.client.conf;
 
 import com.temah.common.redis.RedisUtils;
 import org.springframework.context.annotation.Bean;

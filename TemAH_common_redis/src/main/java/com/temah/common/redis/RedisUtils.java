@@ -42,6 +42,41 @@ public class RedisUtils {
     }
 
     /**
+     * 保存key(带超时时间), duration不能为null
+     */
+    public void set(String key, Object value, Duration duration) {
+        redisTemplate.opsForValue().set(key, value, duration);
+    }
+
+    /**
+     * 仅当key不存在时保存key(当key已经存在则返回false)
+     */
+    public Boolean setIfAbsent(String key, Object value) {
+        return redisTemplate.opsForValue().setIfAbsent(key, value);
+    }
+
+    /**
+     * 仅当key不存在时保存key(当key已经存在则返回false, 带超时时间), duration不能为null
+     */
+    public Boolean setIfAbsent(String key, Object value, Duration duration) {
+        return redisTemplate.opsForValue().setIfAbsent(key, value, duration);
+    }
+
+    /**
+     * 仅当key已经存在时保存key(如果key不存在则返回false)
+     */
+    public Boolean setIfPresent(String key, Object value) {
+        return redisTemplate.opsForValue().setIfPresent(key, value);
+    }
+
+    /**
+     * 仅当key已经存在时保存key(如果key不存在则返回false, 带超时时间), duration不能为null
+     */
+    public Boolean setIfPresent(String key, Object value, Duration duration) {
+        return redisTemplate.opsForValue().setIfPresent(key, value, duration);
+    }
+
+    /**
      * 删除key
      */
     public Boolean del(String key) {
@@ -71,6 +106,13 @@ public class RedisUtils {
      */
     public Boolean expire(String key, long timeoutSeconds) {
         return redisTemplate.expire(key, timeoutSeconds, TimeUnit.SECONDS);
+    }
+
+    /**
+     * 设置过期时间, duration不能为null
+     */
+    public Boolean expire(String key, Duration duration) {
+        return redisTemplate.expire(key, duration);
     }
 
     /**
@@ -420,5 +462,37 @@ public class RedisUtils {
      */
     public Set<Object> zReverseRangeByScore(String key, RedisZSetCommands.Range range) {
         return redisTemplate.opsForZSet().reverseRangeByLex(key, range);
+    }
+
+    //--------------------------------------Redis锁--------------------------------------
+    //获取线程前缀，同时也是线程表示。通过UUID唯一性
+    private static final String ID_PREFIX = UUID.randomUUID().toString() + "-";
+    //与线程id组合
+    private String getThreadId() {
+        return ID_PREFIX + Thread.currentThread().getId();
+    }
+    /**
+     * 尝试获取Redis锁并设置过期时间，成功则返回true, duration不能为null
+     */
+    public boolean tryLock(String key, Duration duration) {
+        //获取线程id
+        String id = getThreadId();
+        //获取锁
+        return Boolean.TRUE.equals(setIfAbsent(key, id, duration));
+    }
+    /**
+     * 移除Redis锁
+     */
+    public boolean unLock(String key) {
+        //获取存储的线程标识
+        String value = (String) get(key);
+        //当前线程的线程标识
+        String id = getThreadId();
+        boolean ret = false;
+        //线程标识相同则删除否,则不删除
+        if (id.equals(value)){
+            ret = Boolean.TRUE.equals(del(key));
+        }
+        return ret;
     }
 }
