@@ -20,6 +20,7 @@
         <module>TemAH_auth_resource</module>
         <module>TemAH_lam</module>
         <module>TemAH_monitor</module>
+        <module>TemAH_adapter</module>
     </modules>
 
     <groupId>com.temah</groupId>
@@ -39,6 +40,7 @@
         <mybatis.version>2.3.1</mybatis.version>
         <java-jwt.version>4.4.0</java-jwt.version>
         <jsch.version>0.1.55</jsch.version>
+        <spring-kafka.version>2.9.10</spring-kafka.version>
     </properties>
 
     <dependencyManagement>
@@ -89,6 +91,11 @@
                 <groupId>com.jcraft</groupId>
                 <artifactId>jsch</artifactId>
                 <version>${jsch.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.kafka</groupId>
+                <artifactId>spring-kafka</artifactId>
+                <version>${spring-kafka.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

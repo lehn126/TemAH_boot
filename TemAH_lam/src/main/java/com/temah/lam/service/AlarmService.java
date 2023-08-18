@@ -3,6 +3,7 @@ package com.temah.lam.service;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.temah.common.http.RestTemplateUtils;
 import com.temah.lam.dto.AlarmDto;
+import com.temah.lam.producer.KafkaProducer;
 import com.temah.lam.utils.CustomJacksonObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,20 +21,30 @@ public class AlarmService {
 
     private final ObjectMapper objectMapper = new CustomJacksonObjectMapper();
 
-    @Value("${lam.push.restful.enable:false}")
+    @Value("${alarm.consumer.restful.enable:false}")
     private boolean restfulPushEnable = false;
 
-    @Value("${lam.push.restful.uri:}")
+    @Value("${alarm.consumer.restful.uri:}")
     private String restfulPushUri = null;
 
-    @Value("${lam.push.feign.enable:false}")
-    private boolean feignPushEnable = false;
+    @Value("${alarm.consumer.kafka.enable:false}")
+    private boolean kafkaPushEnable = false;
+
+    @Value("${alarm.consumer.kafka.topic:topic_alarm}")
+    private String kafkaPushTopic = null;
 
     private RestTemplateUtils restTemplateUtils;
+
+    private KafkaProducer kafkaProducer;
 
     @Autowired
     public void setRestTemplateUtils(RestTemplateUtils restTemplateUtils) {
         this.restTemplateUtils = restTemplateUtils;
+    }
+
+    @Autowired
+    public void setKafkaProducer(KafkaProducer kafkaProducer) {
+        this.kafkaProducer = kafkaProducer;
     }
 
     private void pushAlarmByRestful(AlarmDto alarm) throws Exception {
@@ -43,18 +54,30 @@ public class AlarmService {
                     MediaType.APPLICATION_JSON, null, body, null
             ), String.class);
         } else {
-            logger.error("参数'lam.push.restful.uri'未配置");
+            logger.error("参数'alarm.consumer.restful.uri'未配置");
+        }
+    }
+
+    private void pushAlarmByKafka(AlarmDto alarm) throws Exception {
+        if (kafkaPushTopic != null && !kafkaPushTopic.isEmpty()) {
+            String body = objectMapper.writeValueAsString(alarm);
+            this.kafkaProducer.send(kafkaPushTopic, null, null, body);
+        } else {
+            logger.error("参数'alarm.consumer.kafka.topic'未配置");
         }
     }
 
     private void pushAlarm(AlarmDto alarm) {
         try {
             if (restfulPushEnable) {
-                logger.debug("使用Restful API创建告警. {}", alarm);
+                logger.debug("使用Restful API推送告警. {}", alarm);
                 pushAlarmByRestful(alarm);
+            } else if (kafkaPushEnable) {
+                logger.debug("使用Kafka推送告警. {}", alarm);
+                pushAlarmByKafka(alarm);
             }
         } catch (Exception e) {
-            logger.error("创建告警出错. {}", alarm, e);
+            logger.error("推送告警出错. {}", alarm, e);
         }
     }
 
