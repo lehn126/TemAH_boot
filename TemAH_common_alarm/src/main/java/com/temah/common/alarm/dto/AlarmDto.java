@@ -1,10 +1,13 @@
-package com.temah.lam.dto;
+package com.temah.common.alarm.dto;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
+/**
+ * 告警消息结构
+ */
 public class AlarmDto {
     private String eventTime;
 

@@ -12,6 +12,8 @@
     <modules>
         <module>TemAH_common</module>
         <module>TemAH_common_redis</module>
+        <module>TemAH_common_kafka</module>
+        <module>TemAH_common_alarm</module>
         <module>TemAH_demo_jwt</module>
         <module>TemAH_ahfm</module>
         <module>TemAH_auth</module>
@@ -34,6 +36,8 @@
 
         <TemAH_common.version>0.0.1-SNAPSHOT</TemAH_common.version>
         <TemAH_common_redis.version>0.0.1-SNAPSHOT</TemAH_common_redis.version>
+        <TemAH_common_kafka.version>0.0.1-SNAPSHOT</TemAH_common_kafka.version>
+        <TemAH_common_alarm.version>0.0.1-SNAPSHOT</TemAH_common_alarm.version>
 
         <spring-security-oauth2-authorization-server.version>0.4.3</spring-security-oauth2-authorization-server.version>
         <spring-boot-admin.version>2.7.10</spring-boot-admin.version>
@@ -54,6 +58,16 @@
                 <groupId>com.temah</groupId>
                 <artifactId>TemAH_common_redis</artifactId>
                 <version>${TemAH_common_redis.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.temah</groupId>
+                <artifactId>TemAH_common_kafka</artifactId>
+                <version>${TemAH_common_kafka.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.temah</groupId>
+                <artifactId>TemAH_common_alarm</artifactId>
+                <version>${TemAH_common_alarm.version}</version>
             </dependency>
 
             <dependency>

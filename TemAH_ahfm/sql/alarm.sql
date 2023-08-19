@@ -1,14 +1,14 @@
 CREATE TABLE `alarm` (
-                         `id` INT(11) NOT NULL AUTO_INCREMENT,
-                         `eventTime` VARCHAR(50) NULL DEFAULT NULL,
-                         `managedObject` VARCHAR(255) NULL DEFAULT NULL,
-                         `alarmType` VARCHAR(50) NULL DEFAULT NULL,
-                         `probableCause` VARCHAR(255) NULL DEFAULT NULL,
-                         `perceivedSeverity` VARCHAR(50) NULL DEFAULT NULL,
-                         `specificProblem` VARCHAR(255) NULL DEFAULT NULL,
-                         `additionalText` LONGTEXT NULL DEFAULT NULL,
-                         `clearFlag` INT(11) UNSIGNED NULL DEFAULT '0',
-                         `terminateState` INT(11) UNSIGNED NULL DEFAULT '0',
+                         `id` int(11) NOT NULL AUTO_INCREMENT,
+                         `eventTime` varchar(50) DEFAULT NULL,
+                         `managedObject` varchar(255) DEFAULT NULL,
+                         `alarmType` varchar(50) DEFAULT NULL,
+                         `probableCause` varchar(255) DEFAULT NULL,
+                         `perceivedSeverity` varchar(50) DEFAULT NULL,
+                         `specificProblem` varchar(255) DEFAULT NULL,
+                         `additionalText` longtext DEFAULT NULL,
+                         `clearFlag` int(11) DEFAULT 0,
+                         `terminateState` int(11) DEFAULT 0,
                          PRIMARY KEY (`id`) USING BTREE
 )
     COLLATE='utf8_general_ci'

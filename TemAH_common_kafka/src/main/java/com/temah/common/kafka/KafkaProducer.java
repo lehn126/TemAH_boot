@@ -1,4 +1,4 @@
-package com.temah.adapter.producer;
+package com.temah.common.kafka;
 
 import org.springframework.kafka.core.KafkaTemplate;
 

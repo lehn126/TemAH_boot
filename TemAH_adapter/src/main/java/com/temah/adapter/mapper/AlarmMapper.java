@@ -1,6 +1,6 @@
 package com.temah.adapter.mapper;
 
-import com.temah.adapter.dto.AlarmDto;
+import com.temah.common.alarm.dto.AlarmDto;
 import com.temah.common.mapper.FieldMapper;
 import com.temah.common.mapper.ObjectMapper;
 

@@ -17,9 +17,9 @@ public class Alarm implements Serializable {
 
     private String specificProblem;
 
-    private Integer clearFlag;
+    private Integer clearFlag = 0;
 
-    private Integer terminateState;
+    private Integer terminateState = 0;
 
     private String additionalText;
 

@@ -7,42 +7,28 @@
         <artifactId>TemAH_boot</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-    <artifactId>TemAH_adapter</artifactId>
+    <artifactId>TemAH_common_alarm</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>TemAH_adapter</name>
-    <description>TemAH_adapter</description>
+    <name>TemAH_common_alarm</name>
+    <description>TemAH_common_alarm</description>
     <properties>
 
     </properties>
     <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
-        </dependency>
-
         <dependency>
             <groupId>com.temah</groupId>
             <artifactId>TemAH_common</artifactId>
         </dependency>
         <dependency>
             <groupId>com.temah</groupId>
-            <artifactId>TemAH_common_alarm</artifactId>
+            <artifactId>TemAH_common_kafka</artifactId>
         </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
         </dependency>
     </dependencies>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
 
 </project>

@@ -40,13 +40,12 @@
         </dependency>
 
         <dependency>
-            <groupId>org.springframework.kafka</groupId>
-            <artifactId>spring-kafka</artifactId>
-        </dependency>
-
-        <dependency>
             <groupId>com.temah</groupId>
             <artifactId>TemAH_common</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.temah</groupId>
+            <artifactId>TemAH_common_alarm</artifactId>
         </dependency>
 
         <dependency>

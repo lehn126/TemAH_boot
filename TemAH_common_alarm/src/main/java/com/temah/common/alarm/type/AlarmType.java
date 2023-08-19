@@ -1,4 +1,4 @@
-package com.temah.ahfm.alarm;
+package com.temah.common.alarm.type;
 
 public enum AlarmType {
     CommunicationsAlarm,

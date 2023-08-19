@@ -22,7 +22,7 @@ spring:
         username: admin # Spring Boot Admin Server 注册使用的账户密码
         password: admin
   kafka:
-    bootstrap-servers: 127.0.0.1:9092,127.0.0.1:9093,127.0.0.1:9094 # kafka集群信息
+    bootstrap-servers: 192.168.2.105:9092,192.168.2.105:9093,192.168.2.105:9094 # kafka集群信息
     producer: # 生产者配置
       retries: 3 # 设置大于0的值，则客户端会将发送失败的记录重新发送
       batch-size: 16384 #16K
@@ -77,8 +77,8 @@ alarm:
     consumer:
       address: "127.0.0.1:8001"
       restful:
-        enable: true
+        enable: false
         uri: http://${alarm.consumer.address}/alarm/new
       kafka:
-        enable: false
+        enable: true
         topic: topic_alarm
