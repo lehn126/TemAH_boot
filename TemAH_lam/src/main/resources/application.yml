@@ -75,10 +75,10 @@ management: # actuator打开SpringBoot Admin使用的监控端点
 
 alarm:
     consumer:
-      address: "127.0.0.1:8001"
+      address: "127.0.0.1:8001" # 最终告警消费者AHFM的地址
       restful:
         enable: false
         uri: http://${alarm.consumer.address}/alarm/new
-      kafka:
+      kafka: # 发送告警到Kafka时才需要配
         enable: true
-        topic: topic_alarm
+        topic: topic_alarm # 发送告警到Kafka使用的topic

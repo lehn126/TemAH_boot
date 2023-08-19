@@ -5,8 +5,14 @@ package com.temah.common.alarm.properties;
  */
 public class AlarmProperties {
 
+    /**
+     * 告警消费者配置
+     */
     private AlarmProperties.AlarmConsumer consumer = new AlarmProperties.AlarmConsumer();
 
+    /**
+     * Adapter配置
+     */
     private AlarmProperties.AlarmAdapter adapter = new AlarmProperties.AlarmAdapter();
 
     public AlarmProperties.AlarmConsumer getConsumer() {
@@ -26,8 +32,17 @@ public class AlarmProperties {
     }
 
     public static class AlarmConsumer {
+        /**
+         * 最终告警消费者的地址
+         */
         private String address;
+        /**
+         * 使用Restful API发送告警到消费者时使用
+         */
         private AlarmProperties.RestfulConsumer restful = new AlarmProperties.RestfulConsumer();
+        /**
+         * 发送告警到Kafka时使用
+         */
         private AlarmProperties.kafkaConsumer kafka = new AlarmProperties.kafkaConsumer();
 
         public String getAddress() {
@@ -56,7 +71,13 @@ public class AlarmProperties {
     }
 
     public static class RestfulConsumer {
+        /**
+         * 是否使用Restful API发送告警到消费者
+         */
         private boolean enable = false;
+        /**
+         * 告警消费者使用的Restful API地址
+         */
         private String uri;
 
         public boolean isEnable() {
@@ -77,7 +98,13 @@ public class AlarmProperties {
     }
 
     public static class kafkaConsumer {
+        /**
+         * 是否将告警发送到Kafka
+         */
         private boolean enable = false;
+        /**
+         * 发送告警到Kafka使用的topic
+         */
         private String topic = "topic_alarm";
 
         public boolean isEnable() {
@@ -98,6 +125,9 @@ public class AlarmProperties {
     }
 
     public static class AlarmAdapter {
+        /**
+         * Adapter使用Kafka接收告警时使用
+         */
         private AlarmProperties.kafkaAdapter kafka = new AlarmProperties.kafkaAdapter();
 
         public AlarmProperties.kafkaAdapter getKafka() {
@@ -110,7 +140,13 @@ public class AlarmProperties {
     }
 
     public static class kafkaAdapter {
+        /**
+         * Adapter从Kafka接收告警使用的topic
+         */
         private String topic = "topic_alarm";
+        /**
+         * Adapter从Kafka接收消息使用的group
+         */
         private String group = "group_alarm";
 
         public String getTopic() {

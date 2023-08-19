@@ -3,7 +3,15 @@ server:
 
 spring:
   application:
-    name: kafka
+    name: temah.adapter
+  boot:
+    admin:
+      client:
+        url: http://localhost:9010 # Spring Boot Admin Server URL用于注册
+        instance:
+          service-host-type: ip # 使用ip注册进来
+        username: admin # Spring Boot Admin Server 注册使用的账户密码
+        password: admin
   kafka:
     bootstrap-servers: 192.168.2.105:9092,192.168.2.105:9093,192.168.2.105:9094 # kafka集群信息
     producer: # 生产者配置
@@ -37,13 +45,25 @@ spring:
       # MANUAL_IMMEDIATE
       ack-mode: manual_immediate
 
+management: # actuator打开SpringBoot Admin使用的监控端点
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: '*' # 通过http暴露所有端点
+  info:
+    env:
+      enabled: true # 启用env信息
+
 alarm:
-  adapter:
+  adapter: # 只有从Kafka收消息的adapter端点才需要配
     kafka:
-      topic: topic_alarm
-      group: group_alarm
+      topic: topic_alarm # 接收告警使用的topic
+      group: group_alarm # 接收消息使用的group
   consumer:
-    address: "127.0.0.1:8001"
+    address: "127.0.0.1:8001" # 最终告警消费者AHFM的地址
     restful:
       enable: true
       uri: http://${alarm.consumer.address}/alarm/new
