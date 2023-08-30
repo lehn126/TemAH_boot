@@ -38,6 +38,9 @@ public class BaseController<T, ID extends Serializable> {
             params.put("pageSize", Integer.MAX_VALUE);
         }
         if (pageIndex != null) {
+            if (pageIndex < 1) {
+                pageIndex = 1;
+            }
             params.put("pageIndex", pageIndex);
         }
     }
