@@ -117,6 +117,14 @@ public class TaskManageController extends BaseController<ScheduleSetting, Intege
         return RestResult.success(affectedRows);
     }
 
+    @GetMapping("/get/{id}")
+    public RestResult get(@PathVariable(name = "id") Integer id, HttpServletRequest request) {
+        if (id == null) {
+            throw new IllegalArgumentException("缺少必填值");
+        }
+        return RestResult.success(service.findById(id));
+    }
+
     @GetMapping("/getAll")
     public RestResult findWith(@RequestParam(name = "sortBy", required = false) String sortBy,
                                @RequestParam(name = "sortOrder", required = false) String sortOrder,

@@ -77,6 +77,15 @@ public class AlarmController extends BaseController<Alarm, Integer> {
         return RestResult.success(alarmService.clearAlarm(id));
     }
 
+    @GetMapping("/get/{id}")
+    public RestResult getAlarm(@PathVariable(name = "id") Integer id, HttpServletRequest request) {
+        if (id == null) {
+            throw new IllegalArgumentException("缺少必填值");
+        }
+        logger.info("获取告警: {}", id);
+        return RestResult.success(alarmService.findById(id));
+    }
+
     @GetMapping("/getAll")
     public RestResult findWith(@RequestParam(name = "sortBy", required = false) String sortBy,
                                @RequestParam(name = "sortOrder", required = false) String sortOrder,
