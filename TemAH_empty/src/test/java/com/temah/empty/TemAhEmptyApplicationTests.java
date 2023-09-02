@@ -1,4 +1,4 @@
-package com.temah.temp;
+package com.temah.empty;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
