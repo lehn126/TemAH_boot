@@ -9,11 +9,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public abstract class BaseService <T, ID extends Serializable> {
+public class BaseService <T, ID extends Serializable> implements IBaseService<T, ID> {
 
-    protected BaseMapper<T,ID> mapper;
+    protected BaseMapper<T, ID> mapper;
 
-    public BaseService(BaseMapper<T,ID> mapper) {
+    public BaseService(BaseMapper<T, ID> mapper) {
         this.mapper = mapper;
     }
 

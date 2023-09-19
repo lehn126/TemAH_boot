@@ -14,7 +14,7 @@ public class ObjectMapper<O, R> {
 
     /**
      * 初始化属性mapper列表
-     * @param fieldMappers
+     * @param fieldMappers field mapper 实例数组
      */
     public void init(FieldMapper<O, R, ?>... fieldMappers) {
         if (fieldMappers != null && fieldMappers.length > 0) {

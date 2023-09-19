@@ -6,9 +6,9 @@ import java.util.Map;
 
 public class BaseController<T, ID extends Serializable> {
 
-    protected BaseService<T, ID> service;
+    protected IBaseService<T, ID> service;
 
-    public BaseController(BaseService<T, ID> service) {
+    public BaseController(IBaseService<T, ID> service) {
         this.service = service;
     }
 

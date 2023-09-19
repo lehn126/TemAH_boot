@@ -1,0 +1,33 @@
+server:
+  port: 8001
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+
+spring:
+  application:
+    name: temah.ahfm
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/test
+  boot:
+    admin:
+      client:
+        url: http://localhost:9010 # Spring Boot Admin Server URL用于注册
+        instance:
+          service-host-type: ip # 使用ip注册进来
+        username: admin # Spring Boot Admin Server 注册使用的账户密码
+        password: admin
+
+management: # actuator打开SpringBoot Admin使用的监控端点
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: '*' # 通过http暴露所有端点
+  info:
+    env:
+      enabled: true # 启用env信息

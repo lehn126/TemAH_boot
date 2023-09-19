@@ -16,6 +16,7 @@
         <module>TemAH_common_alarm</module>
         <module>TemAH_demo_jwt</module>
         <module>TemAH_ahfm</module>
+        <module>TemAH_ahfm_mongodb</module>
         <module>TemAH_auth</module>
         <module>TemAH_auth_server</module>
         <module>TemAH_auth_client</module>
