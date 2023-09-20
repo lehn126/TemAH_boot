@@ -28,6 +28,8 @@ TemAH是我在学习Spring各组件过程中产生的技术验证项目。分为
 
 * 模块TemAH_demo_jwt，一个使用JWT token和自定义Aspect AOP注解进行token验证的demo。
 
+* 模块TemAH_ahfm_mongodb，使用MongoDB和Spring Data重新实现的TemAH_ahfm模块，功能和TemAH_ahfm模块一样，数据库从MySQL换成了MongoDB，ORM组件从MyBatis换成了Spring Data。
+
 项目中涉及告警处理的主要功能由模块TemAH_lam和TemAH_ahfm完成。因此在极简部署模式下仅需要部署模块TemAH_lam和TemAH_ahfm即可完成设备监控任务管理和告警相关处理。同时可以在不改动项目源代码仅修改Yaml配置的情况下加添加Kafka/MQ和模块TemAH_adapter来进行高并发情景下的异步消息处理。
 
 下面是各主要功能模块的简介和使用到的技术说明。
